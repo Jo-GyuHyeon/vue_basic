@@ -31,6 +31,7 @@ export default {
 
   onRestFrom() {
     console.log(tag, 'onRest()');
+    ResultView.hide()
   },
 
   onSearchResult(data){
