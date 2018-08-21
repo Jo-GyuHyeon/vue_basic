@@ -15,7 +15,7 @@ ResultView.render = function (data = []) {
 }
 
 ResultView.getSearchResultsHtml = function (data) {
-    
+    console.log(tag, 'getSearchResultsHtml()', data)
     return data.reduce((html, item) => {
         html += this.getSearchItemHtml(item)
         return html;
@@ -23,6 +23,7 @@ ResultView.getSearchResultsHtml = function (data) {
 }
 
 ResultView.getSearchItemHtml = function(item) {
+    console.log(tag, 'getSearchItemHtml()', data)
     return `<li>
     <img src=${item.image} >
     <p>${item.name}</p>

@@ -1,7 +1,8 @@
-import FormView from '../views/FormView.js';
-import ResultView from '../views/ResultView.js';
+import FormView from '../views/FormView.js'
+import ResultView from '../views/ResultView.js'
+import TabView from '../views/TabView.js'
 
-import SearchModel from '../models/SearchModel.js';
+import SearchModel from '../models/SearchModel.js'
 
 const tag = '[MainControllers]'
 
@@ -12,8 +13,18 @@ export default {
       .on('@submit', e => this.onSubmit(e.detail.input))
       .on('@reset', e => this.onRestFrom())
 
+    TabView.setup(document.querySelector('#tabs'))
+
     ResultView.setup(document.querySelector('#search-result'))
 
+    this.selectedTab = '추천 검색어'
+    this.renderView()
+  },
+
+  renderView(){
+    console.log(tag, 'renderView()');
+    TabView.setActiveTab(this.selectedTab);
+    ResultView.hide();
   },
 
   serarch(query) {
