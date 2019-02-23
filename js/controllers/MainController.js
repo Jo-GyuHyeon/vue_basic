@@ -1,47 +1,63 @@
-import FormView from "../views/FormView.js";
-import ResultView from "../views/ResultView.js";
-import TabView from "../views/TabView.js";
+import FormView from '../views/FormView.js';
+import ResultView from '../views/ResultView.js';
+import TabView from '../views/TabView.js';
+import KeywordView from '../views/keywordView.js';
 
-import SearchModel from "../models/SearchModel.js";
+import SearchModel from '../models/SearchModel.js';
+import KeywordModel from '../models/KeywordModel.js';
 
-const tag = "[MainControllers]";
+const tag = '[MainControllers]';
 
 export default {
   init() {
-    console.log(tag, "init()");
-    FormView.setup(document.querySelector("form"))
-      .on("@submit", e => this.onSubmit(e.detail.input))
-      .on("@reset", e => this.onRestFrom());
+    console.log(tag, 'init()');
+    FormView.setup(document.querySelector('form'))
+      .on('@submit', e => this.onSubmit(e.detail.input))
+      .on('@reset', e => this.onRestFrom());
 
-    TabView.setup(document.querySelector("#tabs"))
-    .on("@change", e => this.onChangeTab(e.detail.tabName));
+    TabView.setup(document.querySelector('#tabs')).on('@change', e =>
+      this.onChangeTab(e.detail.tabName)
+    );
 
-    ResultView.setup(document.querySelector("#search-result"));
+    KeywordView.setup(document.querySelector('#search-keyword'));
+    ResultView.setup(document.querySelector('#search-result'));
 
-    this.selectedTab = "추천 검색어";
+    this.selectedTab = '추천 검색어';
     this.renderView();
   },
 
   renderView() {
-    console.log(tag, "renderView()");
+    console.log(tag, 'renderView()');
     TabView.setActiveTab(this.selectedTab);
+
+    if (this.selectedTab === '추천 검색어') {
+      this.fetchSearchKeyword();
+    } else {
+    }
+
     ResultView.hide();
   },
 
+  fetchSearchKeyword() {
+    KeywordModel.list().then(data => {
+      KeywordView.render(data);
+    });
+  },
+
   serarch(query) {
-    console.log(tag, "search()", query);
+    console.log(tag, 'search()', query);
     SearchModel.list(query).then(data => {
       this.onSearchResult(data);
     });
   },
 
   onSubmit(input) {
-    console.log(tag, "onSubmit()", input);
+    console.log(tag, 'onSubmit()', input);
     this.serarch(input);
   },
 
   onRestFrom() {
-    console.log(tag, "onRest()");
+    console.log(tag, 'onRest()');
     ResultView.hide();
   },
 
@@ -50,6 +66,6 @@ export default {
   },
 
   onChangeTab(tabName) {
-    debugger
+    debugger;
   }
 };
