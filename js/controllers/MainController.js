@@ -35,7 +35,7 @@ export default {
     } else {
     }
 
-    ResultView.hide();
+    // ResultView.hide();
   },
 
   fetchSearchKeyword() {
