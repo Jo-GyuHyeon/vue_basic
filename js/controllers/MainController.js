@@ -13,7 +13,7 @@ export default {
     console.log(tag, 'init()');
     FormView.setup(document.querySelector('form'))
       .on('@submit', e => this.onSubmit(e.detail.input))
-      .on('@reset', e => this.onRestFrom());
+      .on('@reset', e => this.onRestForm());
 
     TabView.setup(document.querySelector('#tabs')).on('@change', e =>
       this.onChangeTab(e.detail.tabName)
@@ -39,7 +39,7 @@ export default {
       debugger;
     }
 
-    // ResultView.hide();
+    ResultView.hide();
   },
 
   fetchSearchKeyword() {
@@ -50,6 +50,7 @@ export default {
 
   serarch(query) {
     console.log(tag, 'search()', query);
+    FormView.setValue(query);
     SearchModel.list(query).then(data => {
       this.onSearchResult(data);
     });
@@ -60,9 +61,9 @@ export default {
     this.serarch(input);
   },
 
-  onRestFrom() {
+  onRestForm() {
     console.log(tag, 'onRest()');
-    ResultView.hide();
+    this.renderView();
   },
 
   onSearchResult(data) {
