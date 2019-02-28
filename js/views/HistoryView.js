@@ -14,6 +14,24 @@ HistoryView.setup = function(el) {
   return this;
 };
 
-HistoryView.render = function(data = []) {};
+HistoryView.render = function(data = []) {
+  this.el.innerHTML = data.length
+    ? this.getKeywordHtml(data)
+    : this.message.NO_KEYWORDS;
+  this.show();
+};
+
+HistoryView.getKeywordHtml = function(data) {
+  return (
+    data.reduce((html, item, index) => {
+      html += `<li data-keyword="${item.keyword}">
+      ${item.keyword}
+      <span class="date">${item.date}</span>
+      <button class="btn-remove"></button>
+      </li>`;
+      return html;
+    }, '<ul class="list">') + '</ul>'
+  );
+};
 
 export default HistoryView;

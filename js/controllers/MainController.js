@@ -43,8 +43,10 @@ export default {
 
     if (this.selectedTab === '추천 검색어') {
       this.fetchSearchKeyword();
+      HistoryView.hide();
     } else {
       this.fetchSearchHistory();
+      KeywordView.hide();
     }
 
     ResultView.hide();
