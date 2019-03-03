@@ -20,6 +20,7 @@ KeywordView.render = function(data = []) {
     : this.message.NO_KEYWORDS;
   this.bindClickEvent();
   this.show();
+  return this;
 };
 
 KeywordView.getKeywordHtml = function(data) {

@@ -26,10 +26,9 @@ export default {
       e => this.onClickKeyword(e.detail.keyword)
     );
 
-    HistoryView.setup(document.querySelector('#search-history')).on(
-      '@click',
-      e => this.onClickHistory(e.detail.keyword)
-    );
+    HistoryView.setup(document.querySelector('#search-history'))
+      .on('@click', e => this.onClickHistory(e.detail.keyword))
+      .on('@remove', e => this.onRemoveHistory(e.detail.keyword));
 
     ResultView.setup(document.querySelector('#search-result'));
 
@@ -60,7 +59,7 @@ export default {
 
   fetchSearchHistory() {
     HistoryModel.list().then(data => {
-      HistoryView.render(data);
+      HistoryView.render(data).bindRemoveBtn();
     });
   },
 
@@ -98,5 +97,10 @@ export default {
 
   onClickHistory() {
     this.serarch(keyword);
+  },
+
+  onRemoveHistory(keyword) {
+    HistoryModel.remove(keyword);
+    this.renderView();
   }
 };
