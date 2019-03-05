@@ -66,6 +66,7 @@ export default {
   serarch(query) {
     console.log(tag, 'search()', query);
     FormView.setValue(query);
+    HistoryModel.add(query);
     SearchModel.list(query).then(data => {
       this.onSearchResult(data);
     });
