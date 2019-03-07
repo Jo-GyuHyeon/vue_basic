@@ -5,6 +5,13 @@ new Vue({
   },
   methods: {
     onSubmit(e) {
+      e.preventDefault;
+    },
+    onkeyup() {
+      if (!this.query.length) this.onReset();
+    },
+    onReset() {
+      this.query = '';
       debugger;
     }
   }
