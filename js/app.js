@@ -25,7 +25,8 @@ new Vue({
     },
     resetForm() {
       this.query = '';
-      debugger;
+      this.submitted = false;
+      this.searchResult = [];
     }
   }
 });
