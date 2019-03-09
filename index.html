@@ -40,7 +40,17 @@
           </li>
         </ul>
         <div v-if="selectedTab === tabs[0]">
-          {{tabs[0]}}
+          <div v-if="keywords.length">
+            <ul class="list">
+              <li v-for="(item, index) in keywords" v-on:click="onClickKeyword(item.keyword)">
+                <span class="number">{{index +1}}</span>
+                {{item.keyword}}
+              </li>
+            </ul>
+          </div>
+          <div v-else>
+            {{tabs[0]}}가 없습니다.
+          </div>
         </div>
         <div v-else>
           {{tabs[1]}}
