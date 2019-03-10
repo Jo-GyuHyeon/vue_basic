@@ -53,7 +53,18 @@
           </div>
         </div>
         <div v-else>
-          {{tabs[1]}}
+          <div v-if="history.length">
+            <ul class="list">
+              <li v-for="item in history" v-on:click="onClickKeyword(item.keyword)">
+                {{item.keyword}}
+                <span class="date">{{item.date}}</span>
+                <button class="btn-remove"></button>
+              </li>
+            </ul>
+          </div>
+          <div v-else>
+            {{tabs[1]}}가 없습니다.
+          </div>
         </div>
       </div>
 
