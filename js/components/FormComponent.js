@@ -1,13 +1,21 @@
 export default {
   template: '#search-form',
+  props: ['value'],
   data() {
     return {
-      query: ''
+      inputValue: this.value
     };
   },
   methods: {
-    onSubmit() {},
-    onkeyup() {},
-    onReset() {}
+    onSubmit() {
+      this.$emit('@submit', this.inputValue);
+    },
+    onkeyup() {
+      if (!this.inputValue.length) this.onReset();
+    },
+    onReset() {
+      this.inputValue = '';
+      this.$emit('@reset');
+    }
   }
 };

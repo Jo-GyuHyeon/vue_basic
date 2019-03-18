@@ -15,7 +15,13 @@
       </header>
 
       <div class="container">
-        <search-form></search-form>
+        <search-form
+          v-bind:value="query"
+          v-on:@submit="onSubmit"
+          v-on:@reset="onReset"
+        >
+        </search-form>
+
         <div v-if="submitted">
           <div v-if="searchResult.length">
             <ul>
@@ -81,13 +87,13 @@
   <form v-on:submit.prevent="onSubmit">
     <input
       type="text"
-      v-model="query"
+      v-model="inputValue"
       v-on:keyup="onkeyup"
       placeholder="검색어를 입력하세요"
       autofocus
     />
     <button
-      v-show="query.length"
+      v-show="inputValue.length"
       v-on:click="onReset"
       type="reset"
       class="btn-reset"

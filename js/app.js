@@ -24,11 +24,9 @@ new Vue({
     this.fetchHistory();
   },
   methods: {
-    onSubmit(e) {
+    onSubmit(query) {
+      this.query = query;
       this.search();
-    },
-    onkeyup() {
-      if (!this.query.length) this.onReset();
     },
     onReset() {
       this.resetForm();
